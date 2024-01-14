@@ -18,6 +18,11 @@ class Stack:
         """Конструктор класса Stack"""
         self.top = None
 
+    def __str__(self):
+        """Магический метод для отображения информации об объекте класса для пользователей."""
+
+        return f'Наверху стека сейчас: {self.top}'
+
     def push(self, data):
         """
         Метод для добавления элемента на вершину стека
@@ -34,4 +39,9 @@ class Stack:
 
         :return: данные удаленного элемента
         """
-        pass
+        if self.top is None:
+            return None
+        else:
+            popped_node = self.top
+            self.top = self.top.next_node
+            return popped_node.data

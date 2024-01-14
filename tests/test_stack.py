@@ -4,14 +4,43 @@ from src.stack import Stack
 
 
 class TestPush(unittest.TestCase):
+    """Тестирование метода push класса Stack"""
     def test_push(self):
         stack = Stack()
-        stack.push('test1')
-        stack.push('test2')
-        stack.push('test3')
-        self.assertEqual(stack.top.data, 'test3')
-        self.assertEqual(stack.top.next_node.data, 'test2')
-        self.assertEqual(stack.top.next_node.next_node.data, 'test1')
-        self.assertEqual(stack.top.next_node.next_node.next_node, None)
+        stack.push('node1')
+        stack.push('node2')
+        stack.push('node3')
+        self.assertEqual(stack.top.data, 'node3')
+        self.assertEqual(stack.top.next_node.data, 'node2')
+        self.assertEqual(stack.top.next_node.next_node.data, 'node1')
+        self.assertIsNone(stack.top.next_node.next_node.next_node)
         with self.assertRaises(AttributeError):
-            self.assertEqual(stack.top.next_node.next_node.next_node.data, AttributeError)
+            error = stack.top.next_node.next_node.next_node.data
+
+
+class TestPopThirst(unittest.TestCase):
+    """Тестирование метода pop класса Stack"""
+    def test_pop_thirst(self):
+        stack = Stack()
+        stack.push('node1')
+        data = stack.pop()
+        self.assertIsNone(stack.top)
+        self.assertEqual(data, 'node1')
+
+
+class TestPopSecond(unittest.TestCase):
+    """Тестирование метода pop класса Stack"""
+    def test_pop_second(self):
+        stack = Stack()
+        stack.push('node1')
+        stack.push('node2')
+        data = stack.pop()
+        self.assertEqual(stack.top.data, 'node1')
+        self.assertEqual(data, 'node2')
+
+
+class TestStrMethod(unittest.TestCase):
+    """Тестирование магического метода __str__ класса Stack"""
+    def test__str__(self):
+        stack = Stack()
+        self.assertEqual(stack.top, None)
